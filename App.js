@@ -1,11 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import AppNavContainer from './src/navigation';
+import GlobalProvider from './src/context/provider';
 
 export default function App() {
   return (
-    <AppNavContainer>
-    </AppNavContainer>
+    <GlobalProvider>
+      <AppNavContainer>
+      </AppNavContainer>
+    </GlobalProvider>
   );
 }
 
