@@ -5,7 +5,7 @@ import auth from './reducers/auth';
 import contacts from './reducers/contacts';
 
 
-const GlobalContext = createContext({});
+export const GlobalContext = createContext({});
 
 const GlobalProvider = ({ children }) => {
     const [authState, authDispatch] = useReducer(auth, authInitialState);
