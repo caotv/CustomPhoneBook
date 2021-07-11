@@ -21,4 +21,10 @@ export default StyleSheet.create({
     width: '100%',  
   },
 
+  error: {
+    paddingTop: 4,
+    color: colors.danger,
+    fontSize: 12,
+  }
+
 });

@@ -11,8 +11,7 @@ const Login = () => {
                 label="User name"
                 value={value}
                 onChangeText={(text) => onChangeText(text)}
-                icon={<Text>HIDE</Text>}
-                iconPosition="right"
+                // error={'This is error'}
             />
              <Input
                 label="Password"
