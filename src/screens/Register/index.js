@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
 import RegisterComponent from '../../components/Register';
+import envs from '../../config/env';
 
 const Register = () => {
 
     const [form, setForm] = useState({});
     const [errors, setErrors] = useState({});
+    const { BACKEND_URL } = envs;
+
+    console.log('BackendUrl', BACKEND_URL);
+    console.log('__DEV__', __DEV__);
+
 
     const onChange = ({ name, value }) => {
         setForm({ ...form, [name]: value });
