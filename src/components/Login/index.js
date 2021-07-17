@@ -5,6 +5,8 @@ import Container from '../../components/common/container';
 import CustomButton from '../../components/common/CustomButton';
 import Input from '../../components/common/Input';
 import styles from './styles';
+import { REGISTER } from '../../constants/routeName';
+
 
 const LoginComponent = () => {
     const {navigate} = useNavigation();
