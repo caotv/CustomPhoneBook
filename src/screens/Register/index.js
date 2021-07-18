@@ -20,10 +20,10 @@ const Register = () => {
 
     useFocusEffect(
         React.useCallback(() => {
-            if (data) {
-                clearAuthState()(authDispatch);
+            if (data || error) {
+                clearAuthState(authDispatch);
             }
-        }, [data])
+        }, [data, error])
     );
 
     const onChange = ({ name, value }) => {

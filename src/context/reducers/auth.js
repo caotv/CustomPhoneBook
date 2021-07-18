@@ -23,7 +23,8 @@ const auth = (state, { type, payload }) => {
             return {
                 ...state,
                 loading: false,
-                data: null
+                data: null,
+                error: null
             }
         default:
             return state;
