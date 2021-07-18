@@ -13,9 +13,12 @@ const RegisterComponent = (
         onChange,
         form,
         errors,
+        loading,
+        error,
     }
 ) => {
     const { navigate } = useNavigation();
+    console.log('Error: ', error);
     return (
         <Container>
             <View>
@@ -25,9 +28,9 @@ const RegisterComponent = (
                     label="User name"
                     placeholder="Enter user name"
                     onChangeText={(value) => {
-                        onChange({ name: "userName", value });
+                        onChange({ name: "username", value });
                     }}
-                    error={errors.userName}
+                    error={errors.username || error?.username?.[0]}
                 />
                 <Input
                     label="First name"
@@ -35,7 +38,7 @@ const RegisterComponent = (
                     onChangeText={(value) => {
                         onChange({ name: "firstName", value });
                     }}
-                    error={errors.firstName}
+                    error={errors.firstName || error?.first_name?.[0]}
                 />
                 <Input
                     label="Last name"
@@ -43,7 +46,7 @@ const RegisterComponent = (
                     onChangeText={(value) => {
                         onChange({ name: "lastName", value });
                     }}
-                    error={errors.lastName}
+                    error={errors.lastName || error?.last_name?.[0]}
                 />
                 <Input
                     label="Email"
@@ -51,7 +54,7 @@ const RegisterComponent = (
                     onChangeText={(value) => {
                         onChange({ name: "email", value });
                     }}
-                    error={errors.email}
+                    error={errors.email || error?.email?.[0]}
                 />
                 <Input
                     label="Password"
@@ -62,7 +65,7 @@ const RegisterComponent = (
                     onChangeText={(value) => {
                         onChange({ name: "password", value });
                     }}
-                    error={errors.password}
+                    error={errors.password || error?.password?.[0]}
                 />
             </View>
 
@@ -70,6 +73,8 @@ const RegisterComponent = (
                 primary
                 title="Submit"
                 onPress={onSubmit}
+                loading={loading}
+                disabled={loading}
             />
 
             <View style={styles.createSection}>

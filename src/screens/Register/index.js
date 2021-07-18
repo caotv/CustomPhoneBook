@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import RegisterComponent from '../../components/Register';
-import envs from '../../config/env';
+import register from '../../context/actions/auth/register';
+import axiosInstance from '../../helper/axiosIntercepter';
+import { GlobalContext } from '../../context/Provider';
 
 const Register = () => {
 
     const [form, setForm] = useState({});
     const [errors, setErrors] = useState({});
-    const { BACKEND_URL } = envs;
+    const { authDispatch, authState: { loading, error, data, } } = useContext(GlobalContext);
 
-    console.log('BackendUrl', BACKEND_URL);
-    console.log('__DEV__', __DEV__);
+    // useEffect(() => {
+    //     axiosInstance.get("/contacts").catch(err => {
+    //         console.log('Error: ', err);
+    //     });
+    // }, [])
 
 
     const onChange = ({ name, value }) => {
@@ -38,12 +43,10 @@ const Register = () => {
     };
 
     const onSubmit = () => {
-        console.log("form: ==>", form);
-
         //validation
-        if (!form.userName) {
+        if (!form.username) {
             setErrors((prev) => {
-                return { ...prev, userName: "Please add a user name" };
+                return { ...prev, username: "Please add a user name" };
             });
         }
         if (!form.firstName) {
@@ -66,6 +69,13 @@ const Register = () => {
                 return { ...prev, password: "Please add a password" };
             });
         }
+
+        if (Object.values(form).length === 5 &&
+            Object.values(form).every(item => item.trim().length > 0) &&
+            Object.values(errors).every(item => !item)) {
+            console.log("SUBMIT");
+            register(form)(authDispatch);
+        }
     };
 
 
@@ -74,7 +84,9 @@ const Register = () => {
             onSubmit={onSubmit}
             onChange={onChange}
             form={form}
-            errors={errors}
+            errors={errors} 
+            error={error}
+            loading={loading}
         />
     );
 }
