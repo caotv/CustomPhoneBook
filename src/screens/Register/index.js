@@ -1,21 +1,30 @@
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import React, { useState, useEffect, useContext } from 'react';
 import RegisterComponent from '../../components/Register';
-import register from '../../context/actions/auth/register';
-import axiosInstance from '../../helper/axiosIntercepter';
+import { LOGIN } from '../../constants/routeName';
+import register, { clearAuthState } from '../../context/actions/auth/register';
 import { GlobalContext } from '../../context/Provider';
 
 const Register = () => {
 
     const [form, setForm] = useState({});
     const [errors, setErrors] = useState({});
+    const { navigate } = useNavigation();
     const { authDispatch, authState: { loading, error, data, } } = useContext(GlobalContext);
 
-    // useEffect(() => {
-    //     axiosInstance.get("/contacts").catch(err => {
-    //         console.log('Error: ', err);
-    //     });
-    // }, [])
+    useEffect(() => {
+        if (data) {
+            navigate(LOGIN);
+        }
+    }, [data])
 
+    useFocusEffect(
+        React.useCallback(() => {
+            if (data) {
+                clearAuthState()(authDispatch);
+            }
+        }, [data])
+    );
 
     const onChange = ({ name, value }) => {
         setForm({ ...form, [name]: value });
@@ -73,7 +82,6 @@ const Register = () => {
         if (Object.values(form).length === 5 &&
             Object.values(form).every(item => item.trim().length > 0) &&
             Object.values(errors).every(item => !item)) {
-            console.log("SUBMIT");
             register(form)(authDispatch);
         }
     };
@@ -84,7 +92,7 @@ const Register = () => {
             onSubmit={onSubmit}
             onChange={onChange}
             form={form}
-            errors={errors} 
+            errors={errors}
             error={error}
             loading={loading}
         />

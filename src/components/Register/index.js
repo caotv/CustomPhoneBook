@@ -18,7 +18,6 @@ const RegisterComponent = (
     }
 ) => {
     const { navigate } = useNavigation();
-    console.log('Error: ', error);
     return (
         <Container>
             <View>
