@@ -6,6 +6,7 @@ import CustomButton from '../../components/common/CustomButton';
 import Input from '../../components/common/Input';
 import styles from './styles';
 import { LOGIN } from '../../constants/routeName';
+import Message from '../common/Message';
 
 const RegisterComponent = (
     {
@@ -23,6 +24,15 @@ const RegisterComponent = (
             <View>
                 <Text style={styles.title}>Wellcome to RNContacts</Text>
                 <Text style={styles.subTitle}>Create free account</Text>
+                <View>
+                    {error?.error && (
+                        <Message
+                            retry
+                            danger
+                            message={error?.error}
+                        />
+                    )}
+                </View>
                 <Input
                     label="User name"
                     placeholder="Enter user name"

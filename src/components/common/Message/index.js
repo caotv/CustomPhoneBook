@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import colors from '../../../assets/theme/colors';
 import styles from './styles';
@@ -16,6 +16,20 @@ const Message = ({
 }) => {
 
     const [userDismissed, setDismissed] = useState(false);
+    const [isFirstTime, setFirstTime] = useState(true);
+
+    useEffect(() => {
+        console.log("aaa");
+        setFirstTime(false);
+    }, []);
+
+    useEffect(() => {
+        console.log("first time", isFirstTime);
+        if (!isFirstTime) {
+            console.log("bbb");
+            setDismissed(false);
+        }
+    },[userDismissed]);
 
     const getFlexDirection = () => {
         if (icon && iconPosition) {
