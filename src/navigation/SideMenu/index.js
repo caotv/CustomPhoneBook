@@ -5,7 +5,7 @@ import Container from '../../components/common/container';
 import { SETTINGS } from '../../constants/routeName';
 import logoutUser from '../../context/actions/auth/logoutUser';
 import styles from './styles';
-
+import Icon from '../../components/common/Icon';
 
 
 const SideMenu = ({ navigation, authDispatch }) => {
@@ -19,11 +19,11 @@ const SideMenu = ({ navigation, authDispatch }) => {
             [
                 {
                     text: "Cancel",
-                    onPress: () => {},
+                    onPress: () => { },
                 },
-                { 
-                    text: "OK", 
-                    onPress: () => logoutUser()(authDispatch) 
+                {
+                    text: "OK",
+                    onPress: () => logoutUser()(authDispatch)
                 }
             ]
         )
@@ -31,14 +31,14 @@ const SideMenu = ({ navigation, authDispatch }) => {
 
     const MenuItems = [
         {
-            icon: <Text>T</Text>,
+            icon: <Icon name="settings" size={24} color="black" type="MaterialIcons" />,
             name: 'Settings',
             onPress: () => {
                 navigation.navigate(SETTINGS);
             },
         },
         {
-            icon: <Text>T</Text>,
+            icon: <Icon name="logout" size={24} color="black" type="MaterialIcons" />,
             name: 'Logout',
             onPress: handleLogout,
         },

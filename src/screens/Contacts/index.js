@@ -2,17 +2,18 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, Button, Touchable, TouchableOpacity } from 'react-native';
 import Container from '../../components/common/container';
+import Icon from '../../components/common/Icon';
 
 const Contacts = () => {
 
-    const { setOptions, toggleDrawer} = useNavigation();
+    const { setOptions, toggleDrawer } = useNavigation();
     useEffect(() => {
         setOptions({
             headerLeft: () => (
                 <TouchableOpacity onPress={() => {
                     toggleDrawer();
                 }}>
-                    <Text style={{ padding: 10 }}>Nav</Text>
+                    <Icon type="MaterialCommunityIcons" name='menu' size ={25} style={{ padding: 10 }} />
                 </TouchableOpacity>
             )
         })
