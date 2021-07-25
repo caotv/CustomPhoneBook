@@ -1,6 +1,7 @@
-import React from 'react';
+import React from 'react'
 import { View, ScrollView } from 'react-native';
 import styles from './styles';
+
 
 const Container = ({ style, children }) => {
     return (
