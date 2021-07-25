@@ -13,16 +13,20 @@ const SideMenu = ({ navigation, authDispatch }) => {
     const handleLogout = () => {
         navigation.toggleDrawer();
 
-        Alert.alert('Logout!', 'Are you sure to logout?', [
-            {
-                text: 'Cancel',
-                onPress: () => {},
-            },
-            {
-                text: 'OK',
-                onPress: logoutUser()(authDispatch),
-            }
-        ])
+        Alert.alert(
+            'Logout!',
+            'Are you sure to logout?',
+            [
+                {
+                    text: "Cancel",
+                    onPress: () => {},
+                },
+                { 
+                    text: "OK", 
+                    onPress: () => logoutUser()(authDispatch) 
+                }
+            ]
+        )
     }
 
     const MenuItems = [

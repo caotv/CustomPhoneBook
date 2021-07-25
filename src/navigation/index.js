@@ -8,15 +8,17 @@ import { ActivityIndicator } from 'react-native';
 
 
 const AppNavContainer = () => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    const { authState: { isLoggedIn } } = useContext(GlobalContext);
+    const [isAuthenticated, setIsAuthenticated] = useState(isLoggedIn);
     const [authLoaded, setAuthLoaded] = useState(false);
 
 
     const getUser = async () => {
         try {
             const user = await AsyncStorage.getItem('user');
+            setAuthLoaded(true);
             if (user) {
-                setAuthLoaded(true);
                 setIsAuthenticated(true);
             } else {
                 setIsAuthenticated(false);
@@ -27,17 +29,15 @@ const AppNavContainer = () => {
         }
     }
 
-    const { authState: { isLoggedIn } } = useContext(GlobalContext);
 
     useEffect(() => {
         getUser();
     }, [isLoggedIn])
-    console.log(isAuthenticated);
     return (
         <>
             {authLoaded ? (
                 <NavigationContainer>
-                    {isLoggedIn || isAuthenticated ? <DrawerNavigator /> : <AuthNavigator />}
+                    {isAuthenticated ? <DrawerNavigator /> : <AuthNavigator />}
                 </NavigationContainer>)
                 : (<ActivityIndicator />)
             }
