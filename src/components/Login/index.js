@@ -15,6 +15,8 @@ const LoginComponent = ({
     loading,
     errors,
     error,
+    form,
+    justSignUp,
 }) => {
     const { navigate } = useNavigation();
     const [isSecureEntry, setIsSecureEntry] = useState(true);
@@ -26,10 +28,12 @@ const LoginComponent = ({
                 <Text style={styles.title}>Wellcome to RNContacts</Text>
                 <Text style={styles.subTitle}>Please login here</Text>
                 {error && (<Message message={error.detail} onDismiss={() => { }} danger />)}
+                {justSignUp && (<Message message="Wellcome to login!" onDismiss={() => { }} success />)}
 
                 <Input
                     label="User name"
                     placeholder="Enter user name"
+                    value={form.username || null}
                     onChangeText={(value) => {
                         onChange({ name: "username", value });
                     }}
