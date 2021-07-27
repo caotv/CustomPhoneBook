@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LOGIN_FAIL, LOGIN_LOADING, LOGIN_SUCCESS } from "../../../constants/actionTypes";
-import axiosInstance from "../../../helper/axiosIntercepter"
+import axiosInstance from "../../../helper/axiosIntance"
 
 export default ({
     username,

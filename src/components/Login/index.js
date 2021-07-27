@@ -67,7 +67,6 @@ const LoginComponent = ({
                 <Text style={styles.infoText}>Need a new account?</Text>
                 <TouchableOpacity
                     onPress={() => {
-                        console.log("Go to register");
                         navigate(REGISTER);
                     }}
                 >

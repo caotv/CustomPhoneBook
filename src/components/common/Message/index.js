@@ -16,20 +16,6 @@ const Message = ({
 }) => {
 
     const [userDismissed, setDismissed] = useState(false);
-    const [isFirstTime, setFirstTime] = useState(true);
-
-    useEffect(() => {
-        console.log("aaa");
-        setFirstTime(false);
-    }, []);
-
-    useEffect(() => {
-        console.log("first time", isFirstTime);
-        if (!isFirstTime) {
-            console.log("bbb");
-            setDismissed(false);
-        }
-    },[userDismissed]);
 
     const getFlexDirection = () => {
         if (icon && iconPosition) {

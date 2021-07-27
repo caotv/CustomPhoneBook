@@ -1,5 +1,5 @@
 import { REGISTER_LOADING, REGISTER_SUCCESS, REGISTER_FAIL, CLEAR_AUTH_STATE } from "../../../constants/actionTypes";
-import axiosInstance from "../../../helper/axiosIntercepter"
+import axiosInstance from "../../../helper/axiosIntance"
 
 export const clearAuthState = (dispatch) => {
     dispatch({

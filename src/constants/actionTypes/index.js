@@ -8,3 +8,8 @@ export const LOGIN_LOADING = 'LOGIN_LOADING';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT_USER = 'LOGOUT_USER';
+
+//Contact action
+export const GET_CONTACTS_LOADING = 'LOGIN_LOADING';
+export const GET_CONTACTS_SUCCESS = 'LOGIN_SUCCESS';
+export const GET_CONTACTS_FAIL = 'LOGIN_FAIL';
