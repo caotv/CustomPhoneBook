@@ -1,4 +1,4 @@
-import { GET_CONTACTS_FAIL, GET_CONTACTS_LOADING, GET_CONTACTS_SUCCESS } from "../../constants/actionTypes";
+import { CREATE_CONTACT_FAIL, CREATE_CONTACT_LOADING, CREATE_CONTACT_SUCCESS, GET_CONTACTS_FAIL, GET_CONTACTS_LOADING, GET_CONTACTS_SUCCESS } from "../../constants/actionTypes";
 
 const contacts = (state, { type, payload }) => {
     switch (type) {
@@ -27,6 +27,35 @@ const contacts = (state, { type, payload }) => {
                 ...state,
                 getContacts: {
                     ...state.getContacts,
+                    loading: false,
+                    error: payload,
+                }
+            };
+
+        case CREATE_CONTACT_LOADING:
+            return {
+                ...state,
+                createContact: {
+                    ...state.createContact,
+                    loading: true,
+                    error: null,
+                }
+            };
+        case CREATE_CONTACT_SUCCESS:
+            return {
+                ...state,
+                createContact: {
+                    ...state.createContact,
+                    loading: false,
+                    data: payload,
+                }
+            };
+
+        case CREATE_CONTACT_FAIL:
+            return {
+                ...state,
+                createContact: {
+                    ...state.createContact,
                     loading: false,
                     error: payload,
                 }

@@ -6,10 +6,15 @@ import CustomButton from '../common/CustomButton';
 import Icon from '../common/Icon';
 import Message from '../common/Message';
 import styles from './styles';
+import { useNavigation } from '@react-navigation/native';
+import { CREATE_CONTACT } from '../../constants/routeName';
+
 
 
 
 const ContactsComponent = ({ modalVisible, setModalVisible, loading, data }) => {
+
+    const {navigate} = useNavigation();
 
     const ListEmptyComponent = () => {
         return (
@@ -41,43 +46,50 @@ const ContactsComponent = ({ modalVisible, setModalVisible, loading, data }) => 
         );
     }
 
-    console.log('data', data);
+    // console.log('data', data);
 
     return (
-        <View style={{ backgroundColor: colors.white }}>
-            <AppModal
-                title="My Profile!"
-                // modalFooter={
-                //     <></>
-                // }
-                modalBody={
-                    <View>
-                        <Text>Hello from body</Text>
+        <>
+            <View style={{ backgroundColor: colors.white }}>
+                <AppModal
+                    title="My Profile!"
+                    // modalFooter={
+                    //     <></>
+                    // }
+                    modalBody={
+                        <View>
+                            <Text>Hello from body</Text>
+                        </View>
+                    }
+                    modalVisible={modalVisible}
+                    setModalVisible={setModalVisible}
+                />
+                {loading && (
+                    <View style={{ paddingVertical: 100, paddingHorizontal: 100 }}>
+                        <ActivityIndicator color={colors.primary} size='large' />
                     </View>
-                }
-                modalVisible={modalVisible}
-                setModalVisible={setModalVisible}
-            />
-            {loading && (
-                <View style={{ paddingVertical: 100, paddingHorizontal: 100 }}>
-                    <ActivityIndicator color={colors.primary} size='large' />
-                </View>
-            )}
-            {!loading && (
-                <View style={{ paddingVertical: 20 }}>
-                    <FlatList
-                        renderItem={renderItem}
-                        data={data}
-                        ListEmptyComponent={ListEmptyComponent}
-                        ItemSeparatorComponent={() => {
-                            return <View style={{ height: 0.5, backgroundColor: colors.grey }}></View> 
-                        }}
-                        keyExtractor={(item) => String(item.id)}
-                        ListFooterComponent={<View style={{ height: 150 }}></View>}
-                    />
-                </View>
-            )}
-        </View>
+                )}
+                {!loading && (
+                    <View style={{ paddingVertical: 20 }}>
+                        <FlatList
+                            renderItem={renderItem}
+                            data={data}
+                            ListEmptyComponent={ListEmptyComponent}
+                            ItemSeparatorComponent={() => {
+                                return <View style={{ height: 0.5, backgroundColor: colors.grey }}></View>
+                            }}
+                            keyExtractor={(item) => String(item.id)}
+                            ListFooterComponent={<View style={{ height: 150 }}></View>}
+                        />
+                    </View>
+                )}
+            </View>
+
+            <TouchableOpacity style={styles.floatingBtn} onPress={() => {navigate(CREATE_CONTACT)}}>
+                <Icon type='AntDesign' name='plus' size={24} style={{color: colors.white}}/>
+            </TouchableOpacity>
+
+        </>
     )
 }
 

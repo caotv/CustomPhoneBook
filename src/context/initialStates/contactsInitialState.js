@@ -4,13 +4,13 @@ export default {
         error: null,
         loading: false,
     },
-    createContacts: {
-        data: [],
+    createContact: {
+        data: {},
         error: null,
         loading: false,
     },
-    deleteContacts: {
-        data: [],
+    deleteContact: {
+        data: {},
         error: null,
         loading: false,
     },

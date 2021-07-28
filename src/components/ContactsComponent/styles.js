@@ -39,5 +39,17 @@ export default StyleSheet.create({
     color: colors.primary,
     opacity: 0.6,
     fontSize: 14,
+  },
+
+  floatingBtn: {
+    backgroundColor: 'red',
+    width: 55,
+    height: 55,
+    borderRadius: 100,
+    position: 'absolute',
+    bottom: 45,
+    right: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
   }
 });
