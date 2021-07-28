@@ -28,7 +28,7 @@ const AppNavContainer = () => {
 
 
     useEffect(() => {
-        getUser();r
+        getUser();
     }, [isLoggedIn])
     return (
         <NavigationContainer>

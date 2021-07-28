@@ -3,7 +3,9 @@ import { View, Text, FlatList, TouchableOpacity, ActivityIndicator } from 'react
 import colors from '../../assets/theme/colors';
 import AppModal from '../common/AppModal';
 import CustomButton from '../common/CustomButton';
+import Icon from '../common/Icon';
 import Message from '../common/Message';
+import styles from './styles';
 
 
 
@@ -17,12 +19,24 @@ const ContactsComponent = ({ modalVisible, setModalVisible, loading, data }) => 
         );
     };
 
-    const renderItem = ({item}) => {
+    const renderItem = ({ item }) => {
         return (
-            <TouchableOpacity>
-                <View>
-                    
+            <TouchableOpacity style={styles.wraper} >
+                <View style={styles.contact}>
+                    <View style={styles.avatar}>
+                        <Text style={{ color: colors.white }}>{item.first_name[0]}{item.last_name[0]}</Text>
+                    </View>
+                    <View style={{ paddingLeft: 20 }}>
+                        <View style={styles.itemName}>
+                            <Text style={styles.name}>{item.first_name}</Text>
+                            <Text style={styles.name}> {item.last_name}</Text>
+                        </View>
+                        <View>
+                            <Text style={styles.phoneNumber}>{`${item.country_code} ${item.phone_number}`}</Text>
+                        </View>
+                    </View>
                 </View>
+                <Icon type="MaterialIcons" name="chevron-right" size={35} />
             </TouchableOpacity>
         );
     }
@@ -30,7 +44,7 @@ const ContactsComponent = ({ modalVisible, setModalVisible, loading, data }) => 
     console.log('data', data);
 
     return (
-        <View>
+        <View style={{ backgroundColor: colors.white }}>
             <AppModal
                 title="My Profile!"
                 // modalFooter={
@@ -49,12 +63,20 @@ const ContactsComponent = ({ modalVisible, setModalVisible, loading, data }) => 
                     <ActivityIndicator color={colors.primary} size='large' />
                 </View>
             )}
-            {!loading && (<FlatList
-                renderItem={renderItem}
-                data={data}
-                ListEmptyComponent={ListEmptyComponent}
-                keyExtractor={(item) => String(item.id)}
-            />)}
+            {!loading && (
+                <View style={{ paddingVertical: 20 }}>
+                    <FlatList
+                        renderItem={renderItem}
+                        data={data}
+                        ListEmptyComponent={ListEmptyComponent}
+                        ItemSeparatorComponent={() => {
+                            return <View style={{ height: 0.5, backgroundColor: colors.grey }}></View> 
+                        }}
+                        keyExtractor={(item) => String(item.id)}
+                        ListFooterComponent={<View style={{ height: 150 }}></View>}
+                    />
+                </View>
+            )}
         </View>
     )
 }
