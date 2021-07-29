@@ -1,11 +1,12 @@
 import React from 'react';
-import { Image, Text } from 'react-native';
+import { Image, Switch, Text, View } from 'react-native';
 import Container from '../common/container';
 import CustomButton from '../common/CustomButton';
 import Input from '../common/Input';
 import CountryPicker from 'react-native-country-picker-modal'
 import { DEFAULT_IMAGE_URI } from '../../constants/general';
 import styles from './styles';
+import colors from '../../assets/theme/colors';
 
 
 const CreateContactComponent = ({
@@ -14,6 +15,7 @@ const CreateContactComponent = ({
     onSubmit,
     loading,
     error,
+    toggleValueChange,
 }) => {
     return (
         <Container>
@@ -26,7 +28,7 @@ const CreateContactComponent = ({
                 onChangeText={(value) => {
                     onChangeText('firstName', value);
                 }}
-                error = {error?.first_name?.[0]}
+                error={error?.first_name?.[0]}
             />
             <Input
                 label='Last name'
@@ -35,7 +37,7 @@ const CreateContactComponent = ({
                 onChangeText={(value) => {
                     onChangeText('lastName', value);
                 }}
-                error = {error?.last_name?.[0]}
+                error={error?.last_name?.[0]}
 
             />
             <Input icon={
@@ -59,14 +61,29 @@ const CreateContactComponent = ({
                     onChangeText('phoneNumber', value);
                 }}
                 style={{ paddingLeft: 10 }}
-                placeholder="Enter phone number" 
-                error = {error?.phoneNumber?.[0] || error?.country_code?.[0]}
+                placeholder="Enter phone number"
+                error={error?.phoneNumber?.[0] || error?.country_code?.[0]}
+            />
+
+            <View style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                paddingVertical: 10, alignItems: 'center'
+            }}>
+                <Text style={{ fontSize: 14 }}>Add to favorite</Text>
+                <Switch
+                    trackColor={{ false: 'blue', true: colors.primary }}
+                    thumbColor={colors.white}
+                    ios_backgroundColor="#3e3e3e"
+                    onValueChange={() => toggleValueChange()}
+                    value={form.isFavorite}
                 />
+            </View>
 
             <CustomButton
                 loading={loading}
                 disabled={loading}
-                title={loading ? 'Requesting': 'Submit'}
+                title={loading ? 'Requesting' : 'Submit'}
                 primary
                 onPress={() => onSubmit()}
             />

@@ -19,6 +19,10 @@ const CreateContact = () => {
         navigate(CONTACT_LIST);
     }
 
+    const toggleValueChange = () => {
+        setForm({ ...form, 'isFavorite': !form.isFavorite })
+    }
+
     const onSubmit = () => {
         createContact(form)(contactsDispatch)(onSuccess);
     }
@@ -30,6 +34,7 @@ const CreateContact = () => {
             onSubmit={onSubmit}
             loading={loading}
             error={error}
+            toggleValueChange = {toggleValueChange}
         />
     );
 }
