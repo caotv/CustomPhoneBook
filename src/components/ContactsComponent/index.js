@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
 import colors from '../../assets/theme/colors';
 import AppModal from '../common/AppModal';
-import CustomButton from '../common/CustomButton';
 import Icon from '../common/Icon';
 import Message from '../common/Message';
 import styles from './styles';
@@ -12,9 +11,9 @@ import { CREATE_CONTACT } from '../../constants/routeName';
 
 
 
-const ContactsComponent = ({ modalVisible, setModalVisible, loading, data }) => {
+const ContactsComponent = ({ modalVisible, setModalVisible, loading, data, sortBy }) => {
 
-    const {navigate} = useNavigation();
+    const { navigate } = useNavigation();
 
     const ListEmptyComponent = () => {
         return (
@@ -73,7 +72,22 @@ const ContactsComponent = ({ modalVisible, setModalVisible, loading, data }) => 
                     <View style={{ paddingVertical: 20 }}>
                         <FlatList
                             renderItem={renderItem}
-                            data={data}
+                            data={sortBy ? data.sort((a, b) => {
+                                if (sortBy === 'First Name') {
+                                    if (a.first_name < b.first_name) {
+                                        return -1;
+                                    } else {
+                                        return 1;
+                                    }
+                                }
+                                if (sortBy === 'Last Name') {
+                                    if (a.last_name < b.last_name) {
+                                        return -1;
+                                    } else {
+                                        return 1;
+                                    }
+                                }
+                            }) : data}
                             ListEmptyComponent={ListEmptyComponent}
                             ItemSeparatorComponent={() => {
                                 return <View style={{ height: 0.5, backgroundColor: colors.grey }}></View>
@@ -85,8 +99,8 @@ const ContactsComponent = ({ modalVisible, setModalVisible, loading, data }) => 
                 )}
             </View>
 
-            <TouchableOpacity style={styles.floatingBtn} onPress={() => {navigate(CREATE_CONTACT)}}>
-                <Icon type='AntDesign' name='plus' size={24} style={{color: colors.white}}/>
+            <TouchableOpacity style={styles.floatingBtn} onPress={() => { navigate(CREATE_CONTACT) }}>
+                <Icon type='AntDesign' name='plus' size={24} style={{ color: colors.white }} />
             </TouchableOpacity>
 
         </>

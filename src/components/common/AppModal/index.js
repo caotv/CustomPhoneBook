@@ -4,7 +4,6 @@ import Icon from '../Icon';
 import styles from './styles';
 import PropTypes from 'prop-types';
 
-
 const AppModal = ({
     modalVisible,
     modalFooter,
