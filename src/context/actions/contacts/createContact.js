@@ -3,8 +3,6 @@ import { CREATE_CONTACT_FAIL, CREATE_CONTACT_LOADING, CREATE_CONTACT_SUCCESS, } 
 import axiosInstance from "../../../helper/axiosIntance"
 
 export default (form) => (dispatch) => (onSuccess) => {
-    console.log('Create contact axios');
-
     const payload = {
         "country_code": form.countryCode || '',
         "first_name": form.firstName || '',

@@ -3,8 +3,7 @@ import { Image, Switch, Text, TouchableOpacity, View } from 'react-native';
 import Container from '../common/container';
 import CustomButton from '../common/CustomButton';
 import Input from '../common/Input';
-import CountryPicker from 'react-native-country-picker-modal'
-import { DEFAULT_IMAGE_URI } from '../../constants/general';
+import CountryPicker from 'react-native-country-picker-modal';
 import styles from './styles';
 import colors from '../../assets/theme/colors';
 import ImagePicker from '../common/ImagePicker';
@@ -20,10 +19,13 @@ const CreateContactComponent = ({
     sheetRef,
     openSheet,
     closeSheet,
+    onFileSelected,
+    localFile,
 }) => {
+
     return (
         <Container>
-            <Image width={150} height={150} source={{ uri: DEFAULT_IMAGE_URI }} style={styles.imageView} />
+            <Image width={150} height={150} source={{ uri: localFile }} style={styles.imageView} />
             <TouchableOpacity onPress={openSheet}>
                 <Text style={styles.choseText}>Choose picture</Text>
             </TouchableOpacity>
@@ -94,7 +96,7 @@ const CreateContactComponent = ({
                 onPress={() => onSubmit()}
             />
 
-            <ImagePicker ref={sheetRef} />
+            <ImagePicker onFileSelected={onFileSelected} ref={sheetRef} />
         </Container>
     );
 };
