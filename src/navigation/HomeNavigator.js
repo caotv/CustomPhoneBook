@@ -8,7 +8,6 @@ import Settings from '../screens/Settings';
 import { Text } from 'react-native';
 import Logout from '../screens/Logout';
 
-r
 const HomeNavigator = () => {
 
     const HomeStack = createStackNavigator();

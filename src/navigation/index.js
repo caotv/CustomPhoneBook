@@ -5,6 +5,7 @@ import DrawerNavigator from './DrawerNavigator';
 import { GlobalContext } from '../context/Provider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LOGIN_SUCCESS } from '../constants/actionTypes';
+import { navigationRef } from './RootNavigator';
 
 
 const AppNavContainer = () => {
@@ -31,7 +32,7 @@ const AppNavContainer = () => {
         getUser();
     }, [isLoggedIn])
     return (
-        <NavigationContainer>
+        <NavigationContainer ref={navigationRef}>
             {isLoggedIn ? <DrawerNavigator /> : <AuthNavigator />}
         </NavigationContainer>
     );
