@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, ActivityIndicator, Image } from 'react-native';
 import colors from '../../assets/theme/colors';
 import AppModal from '../common/AppModal';
 import Icon from '../common/Icon';
@@ -23,13 +23,16 @@ const ContactsComponent = ({ modalVisible, setModalVisible, loading, data, sortB
         );
     };
 
+    console.log("Data =>", data);
+
     const renderItem = ({ item }) => {
         return (
             <TouchableOpacity style={styles.wraper} >
                 <View style={styles.contact}>
-                    <View style={styles.avatar}>
+                    {/* <View style={styles.avatar}>
                         <Text style={{ color: colors.white }}>{item.first_name[0]}{item.last_name[0]}</Text>
-                    </View>
+                    </View> */}
+                    <Image style={styles.avatar} source={{uri: item.contact_picture}}/>
                     <View style={{ paddingLeft: 20 }}>
                         <View style={styles.itemName}>
                             <Text style={styles.name}>{item.first_name}</Text>

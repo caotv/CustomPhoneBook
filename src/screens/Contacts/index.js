@@ -49,7 +49,6 @@ const Contacts = () => {
     }
 
 
-
     return (
         <ContactsComponent
             modalVisible={modalVisible}
