@@ -36,6 +36,7 @@ const Contacts = () => {
     useFocusEffect(
         React.useCallback(() => {
             getSettings();
+            getContacts()(contactsDispatch);
         }, [])
     );
 
@@ -47,7 +48,7 @@ const Contacts = () => {
         }
     }
 
- 
+
 
     return (
         <ContactsComponent

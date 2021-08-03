@@ -8,9 +8,10 @@ export default (form) => (dispatch) => (onSuccess) => {
         "first_name": form.firstName || '',
         "last_name": form.lastName || '',
         "phone_number": form.phoneNumber || '',
-        "contact_picture": form.contactPicture || 'http://google.com',
+        "contact_picture": form.contactPicture || '',
         "is_favorite": form.isFavorite || false,
     };
+    console.log(payload);
 
     dispatch({
         type: CREATE_CONTACT_LOADING
@@ -28,7 +29,7 @@ export default (form) => (dispatch) => (onSuccess) => {
             onSuccess();
 
         }).catch((error) => {
-            console.log('request errror', error);
+            console.log('request errror', error.response);
             dispatch({
                 type: CREATE_CONTACT_FAIL,
                 payload: error.response ? error.response.data : { err: "Something went wrong!" },

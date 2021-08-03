@@ -5,11 +5,13 @@ import { DEFAULT_IMAGE_URI } from '../../constants/general';
 import { CONTACT_LIST } from '../../constants/routeName';
 import createContact from '../../context/actions/contacts/createContact';
 import { GlobalContext } from '../../context/Provider';
+import uploadImage from '../../helper/uploadImage';
 
 
 const CreateContact = () => {
 
     const [form, setForm] = useState({});
+    const [uploading, setUploading] = useState(false);
     const [localFile, setLocalFile] = useState(DEFAULT_IMAGE_URI);
     const { contactsState: { createContact: { loading, data, error } }, contactsDispatch } = useContext(GlobalContext);
     const { navigate } = useNavigation();
@@ -31,8 +33,11 @@ const CreateContact = () => {
         setForm({ ...form, 'isFavorite': !form.isFavorite });
     };
 
-    const onSubmit = () => {
-        createContact(form)(contactsDispatch)(onSuccess);
+    const onSubmit = async () => {
+        setUploading(true);
+        var fireBaseImg = await uploadImage(localFile);
+        setUploading(false);
+        createContact({...form, contactPicture: fireBaseImg})(contactsDispatch)(onSuccess);
     };
 
     const closeSheet = () => {
@@ -53,7 +58,7 @@ const CreateContact = () => {
             form={form}
             onChangeText={onChangeText}
             onSubmit={onSubmit}
-            loading={loading}
+            loading={loading || uploading}
             error={error}
             toggleValueChange={toggleValueChange}
             sheetRef={sheetRef}
